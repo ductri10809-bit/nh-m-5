@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Chan truy cap truc tiep thu muc backend (tru api)
+RewriteRule ^backend/(model|controller|middleware|cau_hinh|helpers)/ - [F,L]
+
+# Cho phep truy cap api
+RewriteRule ^backend/api/ - [L]
