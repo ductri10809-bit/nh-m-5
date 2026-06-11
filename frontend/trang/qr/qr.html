@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mã QR Thanh Toán - Luxurious Fashion Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            margin-top: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 60px auto 0;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .qr-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .qr-code {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .qr-code img {
+            max-width: 300px;
+            height: auto;
+        }
+
+        .qr-code .loading {
+            width: 300px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        .info-box {
+            background: #f9f9f9;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .info-box strong {
+            color: #333;
+        }
+
+        .info-box p {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .bank-info {
+            background: #f0f7ff;
+            border: 1px solid #cce5ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .bank-info h3 {
+            color: #2c5aa0;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .bank-info p {
+            color: #333;
+            font-size: 13px;
+            margin: 8px 0;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c00;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏦 Thanh Toán Qua Chuyển Khoản</h1>
+
+        <div id="errorMessage" class="error-message"></div>
+
+        <div class="qr-section">
+            <p style="color: #666; margin-bottom: 10px;"><strong>Mã QR Thanh Toán</strong></p>
+            <div class="qr-code" id="qrCode">
+                <div class="loading">Đang tạo mã QR...</div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <strong>📱 Hướng dẫn:</strong>
+            <p>1. Mở ứng dụng ngân hàng trên điện thoại</p>
+            <p>2. Chọn "Quét mã QR"</p>
+            <p>3. Quét mã QR ở trên</p>
+            <p>4. Kiểm tra thông tin và xác nhận thanh toán</p>
+        </div>
+
+        <div id="bankInfo" class="bank-info" style="display: none;">
+            <h3>🏦 Hoặc chuyển khoản thủ công:</h3>
+            <p><strong>Chủ TK:</strong> DUC TRI</p>
+            <p><strong>Số TK:</strong> 0108210816</p>
+            <p><strong>Ngân hàng:</strong> Techcombank</p>
+            <p><strong>Số tiền:</strong> <span id="amountDisplay">-</span></p>
+            <p><strong>Nội dung:</strong> Thanh toán đơn #<span id="orderIdDisplay">-</span></p>
+        </div>
+
+        <div class="info-box" style="border-left-color: #ffa500; background: #fff9f0;">
+            <strong>⏱️ Lưu ý:</strong>
+            <p>Sau khi thanh toán, chúng tôi sẽ xác nhận trong vòng 10 phút. Bạn sẽ nhận được email xác nhận từ chúng tôi.</p>
+        </div>
+
+        <div class="button-group">
+            <button class="btn-primary" onclick="downloadQR()">⬇️ Tải mã QR</button>
+            <button class="btn-secondary" onclick="window.history.back()">← Quay lại</button>
+        </div>
+    </div>
+
+    <script>
+        let qrImageUrl = '';
+        let orderId = '';
+        let amount = 0;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Get order info from URL or localStorage
+            const params = new URLSearchParams(window.location.search);
+            orderId = params.get('order_id') || localStorage.getItem('order_id') || '';
+            const customerEmail = params.get('customer_email') || localStorage.getItem('customer_email') || '';
+            const customerName = params.get('customer_name') || localStorage.getItem('customer_name') || '';
+            amount = parseInt(params.get('amount') || localStorage.getItem('amount') || 0);
+
+            if (orderId && customerEmail) {
+                localStorage.setItem('order_id', orderId);
+                localStorage.setItem('customer_email', customerEmail);
+                localStorage.setItem('customer_name', customerName);
+                localStorage.setItem('amount', amount);
+
+                await generateQR(orderId, customerEmail, amount);
+                displayInfo();
+            } else {
+                showError('Không tìm thấy thông tin đơn hàng. Vui lòng đặt hàng lại.');
+            }
+        });
+
+        async function generateQR(orderId, customerEmail, amount) {
+            try {
+                const apiUrl = window.location.origin + '/luxurious-fashion-store/backend/api/tao_qr.php';
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `order_id=${orderId}&customer_email=${encodeURIComponent(customerEmail)}&amount=${amount}`
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    qrImageUrl = result.data.qr_image_url || result.data.qr_image_base64;
+                    displayQR();
+                } else {
+                    showError('Lỗi: ' + (result.message || 'Không thể tạo mã QR'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showError('Lỗi kết nối. Vui lòng thử lại.');
+            }
+        }
+
+        function displayQR() {
+            const qrCode = document.getElementById('qrCode');
+            console.log('QR Image URL:', qrImageUrl);
+            
+            if (qrImageUrl.startsWith('data:')) {
+                // Base64 encoded
+                console.log('Using Base64 QR');
+                qrCode.innerHTML = `<img src="${qrImageUrl}" alt="QR Code" style="max-width: 300px;">`;
+            } else if (qrImageUrl.startsWith('/')) {
+                // Already has leading slash - use as is
+                console.log('Using absolute path:', qrImageUrl);
+                qrCode.innerHTML = `<img src="${qrImageUrl}" alt="QR Code" style="max-width: 300px;">`;
+            } else {
+                // Relative path - add slash
+                console.log('Using relative path:', qrImageUrl);
+                const fullPath = qrImageUrl.startsWith('http') ? qrImageUrl : '/' + qrImageUrl;
+                qrCode.innerHTML = `<img src="${fullPath}" alt="QR Code" style="max-width: 300px;">`;
+            }
+        }
+
+        function displayInfo() {
+            document.getElementById('orderIdDisplay').textContent = orderId;
+            document.getElementById('amountDisplay').textContent = formatCurrency(amount);
+            document.getElementById('bankInfo').style.display = 'block';
+        }
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(num);
+        }
+
+        function downloadQR() {
+            if (!qrImageUrl) {
+                alert('Mã QR chưa được tạo');
+                return;
+            }
+
+            if (qrImageUrl.startsWith('data:')) {
+                // Download base64
+                const link = document.createElement('a');
+                link.href = qrImageUrl;
+                link.download = `QR-Don-${orderId}.png`;
+                link.click();
+            } else {
+                // Download file
+                const link = document.createElement('a');
+                link.href = '/' + qrImageUrl;
+                link.download = `QR-Don-${orderId}.png`;
+                link.click();
+            }
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('show');
+            document.getElementById('qrCode').innerHTML = '<div class="loading" style="color: #c00;">Lỗi</div>';
+        }
+    </script>
+</body>
+</html>

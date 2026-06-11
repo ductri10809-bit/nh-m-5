@@ -1,0 +1,21 @@
+/* breadcrumb.css */
+.breadcrumb {
+  padding: 1rem 0;
+  font-size: 0.875rem;
+  color: var(--mau-chu-nhat);
+}
+
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.breadcrumb li + li::before {
+  content: '/';
+  margin-right: 0.5rem;
+}
+
+.breadcrumb a:hover {
+  color: var(--mau-phu);
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sản phẩm — LUXURIOUS STORE</title>
+  <link rel="stylesheet" href="../../css/bien.css">
+  <link rel="stylesheet" href="../../css/chung.css">
+  <link rel="stylesheet" href="../../css/tien_ich.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/header.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/footer.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/breadcrumb.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/the_san_pham.css">
+  <link rel="stylesheet" href="../../css/trang/san_pham.css">
+</head>
+<body>
+  <div id="header"></div>
+  <main class="container">
+    <div class="products-layout">
+      <div id="bo-loc"></div>
+      <div>
+        <div class="products-toolbar">
+          <h1>Bộ sưu tập</h1>
+          <span id="products-count" class="products-count"></span>
+        </div>
+        <div id="danh-sach-san-pham" class="products-grid"></div>
+      </div>
+    </div>
+  </main>
+  <div id="footer"></div>
+  <script src="../../js/tai_component.js"></script>
+  <script src="../../js/chung.js"></script>
+  <script src="../../js/gio_hang.js"></script>
+  <script src="../../js/yeu_thich.js"></script>
+  <script src="../../js/tim_kiem.js"></script>
+  <script src="../../js/thanh_phan/header.js"></script>
+  <script src="../../js/thanh_phan/the_san_pham.js"></script>
+  <script src="../../js/trang/san_pham.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      taiComponent('#bo-loc', '../../thanh_phan/bo_loc/bo_loc.html');
+    });
+  </script>
+</body>
+</html>

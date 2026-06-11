@@ -1,0 +1,150 @@
+/* chung.css */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-phu);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--mau-chu);
+  background: var(--mau-nen);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; transition: opacity var(--transition), color var(--transition); }
+a:hover { opacity: 0.65; }
+
+.container {
+  width: min(100% - 2.5rem, var(--chieu-rong-max));
+  margin-inline: auto;
+}
+
+main { min-height: 60vh; padding-top: var(--header-h); }
+
+.section-title {
+  font-family: var(--font-chinh);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: var(--mau-chinh);
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--mau-chu-nhat);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: -1.5rem 0 2.5rem;
+}
+
+.py-2 { padding-block: 3rem; }
+.py-3 { padding-block: 5rem; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  font-family: var(--font-phu);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid var(--mau-chinh);
+  background: transparent;
+  color: var(--mau-chinh);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.btn:hover {
+  background: var(--mau-chinh);
+  color: var(--mau-nen);
+  opacity: 1;
+}
+
+.btn-primary {
+  background: var(--mau-chinh);
+  color: var(--mau-nen);
+}
+
+.btn-primary:hover {
+  background: var(--mau-phu);
+  border-color: var(--mau-phu);
+}
+
+.btn-ghost {
+  border-color: var(--mau-vien);
+  color: var(--mau-chu-nhat);
+}
+
+.btn-ghost:hover {
+  border-color: var(--mau-chinh);
+  color: var(--mau-chinh);
+  background: transparent;
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.65rem;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem 1.5rem;
+}
+
+.form-group { margin-bottom: 1.25rem; }
+
+.form-group label {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mau-chu-nhat);
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--mau-vien);
+  background: var(--mau-nen);
+  font-family: var(--font-phu);
+  font-size: 0.9rem;
+  transition: border-color var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--mau-chinh);
+}
+
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  background: var(--mau-chinh);
+  color: var(--mau-nen);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  z-index: 9999;
+  transition: transform 0.4s ease;
+}
+
+.toast.show { transform: translateX(-50%) translateY(0); }

@@ -1,0 +1,47 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../../trang/trang_chu/trang_chu.html" class="logo" title="LUXURIOUS STORE">
+      <span class="logo-text">Luxurious Store</span>
+    </a>
+
+    <!-- Nav dropdown button (mobile/tablet only) - will show current page -->
+    <button class="nav-dropdown-btn" id="nav-dropdown-btn" aria-label="Menu">
+      <span class="nav-current-page">Trang chủ</span>
+      <svg class="dropdown-arrow" viewBox="0 0 24 24" width="16" height="16">
+        <path d="M7 10l5 5 5-5z" fill="currentColor"></path>
+      </svg>
+    </button>
+
+    <nav class="site-nav" id="site-nav">
+      <ul>
+        <li><a href="../../trang/trang_chu/trang_chu.html">Trang chủ</a></li>
+        <li><a href="../../trang/san_pham/san_pham.html">Sản phẩm</a></li>
+        <li><a href="../../trang/tin_tuc/tin_tuc.html">Tin tức</a></li>
+        <li><a href="../../trang/lien_he/lien_he.html">Liên hệ</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <div class="search-container">
+        <input type="search" id="tim-kiem" placeholder="Tìm kiếm" aria-label="Tìm kiếm">
+        <button class="search-icon-btn" id="search-icon-btn" aria-label="Tìm kiếm">
+          <svg viewBox="0 0 24 24" width="16" height="16">
+            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <a href="../../trang/yeu_thich/yeu_thich.html" class="header-icon" title="Yêu thích">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>
+        <span id="wishlist-count">0</span>
+      </a>
+      <a href="../../trang/gio_hang/gio_hang.html" class="header-icon" title="Giỏ hàng">
+        <svg viewBox="0 0 24 24"><path d="M6 6h15l-1.5 9H8L6 6zm0 0L5 3H2"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+        <span id="cart-count">0</span>
+      </a>
+      <a href="../../trang/ho_so/ho_so.html" class="header-icon header-profile" title="Tài khoản">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12zm0 2.2c-3.3 0-9.8 1.7-9.8 5v1.6h19.6V19.2c0-3.3-6.5-5-9.8-5z"/></svg>
+      </a>
+      <div id="auth-actions" class="header-icon header-auth"></div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán QR - Luxurious Fashion Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .qr-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .qr-code {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px dashed #ddd;
+            margin: 20px 0;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-code img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .qr-code .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .qr-info {
+            background: #e8f0ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        .qr-info strong {
+            color: #667eea;
+        }
+
+        .payment-details {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .amount-total {
+            font-size: 24px !important;
+            color: #667eea !important;
+        }
+
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .instructions strong {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .instructions li {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+
+        .success-message {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .error-message {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .footer {
+            background: #f5f5f5;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+
+        .transfer-info {
+            background: #f0f7ff;
+            border: 1px solid #cce5ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .transfer-info h3 {
+            color: #0066cc;
+            margin-bottom: 15px;
+        }
+
+        .bank-item {
+            background: white;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+        }
+
+        .bank-item strong {
+            display: block;
+            color: #333;
+        }
+
+        .bank-item span {
+            display: block;
+            color: #666;
+            font-size: 13px;
+            margin-top: 3px;
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .qr-code {
+                min-height: 250px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💳 Thanh toán chuyển khoản</h1>
+            <p>Quét mã QR bằng ứng dụng ngân hàng của bạn</p>
+        </div>
+
+        <div class="content">
+            <div class="success-message" id="successMessage">
+                ✓ Mã QR đã được tạo thành công!
+            </div>
+
+            <div class="error-message" id="errorMessage"></div>
+
+            <!-- Thông tin đơn hàng -->
+            <div class="payment-details">
+                <div class="detail-row">
+                    <span class="detail-label">Mã đơn hàng:</span>
+                    <span class="detail-value" id="orderId">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Khách hàng:</span>
+                    <span class="detail-value" id="customerName">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Ngày tạo:</span>
+                    <span class="detail-value" id="orderDate">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Tổng tiền:</span>
+                    <span class="detail-value amount-total" id="amount">0 VND</span>
+                </div>
+            </div>
+
+            <!-- QR Code -->
+            <div class="qr-section">
+                <h2 style="color: #333; margin-bottom: 15px;">Mã QR thanh toán</h2>
+                <div class="qr-code" id="qrCode">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <span>Đang tạo mã QR...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thông tin chuyển khoản -->
+            <div class="transfer-info">
+                <h3>📱 Hướng dẫn thanh toán:</h3>
+                <ol style="margin-left: 20px;">
+                    <li style="margin: 10px 0;">
+                        <strong>Cách 1: Quét mã QR</strong>
+                        <p style="color: #666; font-size: 13px; margin-top: 5px;">
+                            Mở ứng dụng ngân hàng → Chọn "Quét QR" → Quét mã QR ở trên → Kiểm tra thông tin → Xác nhận thanh toán
+                        </p>
+                    </li>
+                    <li style="margin: 10px 0;">
+                        <strong>Cách 2: Chuyển khoản thủ công</strong>
+                        <p style="color: #666; font-size: 13px; margin-top: 5px;">
+                            Nếu không quét được, bạn có thể chuyển khoản trực tiếp với thông tin dưới đây:
+                        </p>
+                    </li>
+                </ol>
+
+                <div class="bank-item">
+                    <strong>🏦 Ngân hàng Techcombank</strong>
+                    <span><strong>Chủ tài khoản:</strong> DUC TRI</span>
+                    <span><strong>Số tài khoản:</strong> 0108210816</span>
+                    <span><strong>Nội dung:</strong> Thanh toán đơn #<span id="orderId2">-</span> - <span id="customerName2">-</span></span>
+                </div>
+
+                <div class="bank-item">
+                    <strong>🏦 Ngân hàng VPBank</strong>
+                    <span><strong>Chủ tài khoản:</strong> DUC TRI</span>
+                    <span><strong>Số tài khoản:</strong> 1019111119</span>
+                    <span><strong>Nội dung:</strong> Thanh toán đơn #<span id="orderId3">-</span> - <span id="customerName3">-</span></span>
+                </div>
+            </div>
+
+            <div class="qr-info">
+                <strong>⏱️ Lưu ý:</strong> Sau khi thanh toán, chúng tôi sẽ xác nhận trong vòng 10 phút. Bạn sẽ nhận được email xác nhận từ chúng tôi.
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="downloadQR()">⬇️ Tải mã QR</button>
+                <button class="btn btn-secondary" onclick="window.history.back()">Quay lại</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2024 Luxurious Fashion Store. Bảo mật & Tin tưởng.</p>
+        </div>
+    </div>
+
+    <script>
+        // Lấy thông tin từ URL params hoặc localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const orderId = params.get('order_id');
+            const customerEmail = params.get('customer_email');
+            const customerName = params.get('customer_name') || 'Khách hàng';
+            const amount = params.get('amount') || 0;
+
+            if (orderId && customerEmail) {
+                // Lưu vào localStorage
+                localStorage.setItem('qr_payment_data', JSON.stringify({
+                    orderId,
+                    customerEmail,
+                    customerName,
+                    amount
+                }));
+            }
+
+            // Lấy từ localStorage nếu có
+            const savedData = localStorage.getItem('qr_payment_data');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                displayOrderInfo(data);
+                generateQRCode(data);
+            }
+        });
+
+        function displayOrderInfo(data) {
+            document.getElementById('orderId').textContent = '#' + data.orderId;
+            document.getElementById('orderId2').textContent = data.orderId;
+            document.getElementById('orderId3').textContent = data.orderId;
+            document.getElementById('customerName').textContent = data.customerName;
+            document.getElementById('customerName2').textContent = data.customerName;
+            document.getElementById('customerName3').textContent = data.customerName;
+            document.getElementById('amount').textContent = formatCurrency(data.amount);
+            document.getElementById('orderDate').textContent = new Date().toLocaleDateString('vi-VN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function generateQRCode(data) {
+            const formData = new FormData();
+            formData.append('order_id', data.orderId);
+            formData.append('customer_email', data.customerEmail);
+
+            // FIX: Use correct relative path from frontend to backend
+            const apiUrl = window.location.origin + '/luxurious-fashion-store/backend/api/qr_payment_api.php?action=create';
+            
+            fetch(apiUrl, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                return response.json();
+            })
+            .then(result => {
+                if (result.success) {
+                    const qrCode = document.getElementById('qrCode');
+                    qrCode.innerHTML = `<img src="${result.data.qr_image}" alt="QR Code" style="max-width: 250px; height: auto;">`;
+                    document.getElementById('successMessage').classList.add('show');
+                    
+                    // Lưu QR image
+                    localStorage.setItem('qr_image', result.data.qr_image);
+                } else {
+                    showError('Không thể tạo mã QR: ' + result.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showError('Lỗi tạo mã QR. Vui lòng thử lại. ' + error.message);
+            });
+        }
+
+        function downloadQR() {
+            const qrImage = localStorage.getItem('qr_image');
+            if (!qrImage) {
+                alert('Mã QR chưa được tạo');
+                return;
+            }
+
+            const link = document.createElement('a');
+            link.href = qrImage;
+            link.download = `qr_payment_${new Date().getTime()}.png`;
+            link.click();
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(amount);
+        }
+
+        function showError(message) {
+            const errorMsg = document.getElementById('errorMessage');
+            errorMsg.textContent = message;
+            errorMsg.classList.add('show');
+        }
+    </script>
+</body>
+</html>

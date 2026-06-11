@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ho so ca nhan - Luxurious Fashion</title>
+  <link rel="stylesheet" href="../../css/bien.css">
+  <link rel="stylesheet" href="../../css/chung.css">
+  <link rel="stylesheet" href="../../css/tien_ich.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/header.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/footer.css">
+  <link rel="stylesheet" href="../../css/trang/ho_so.css">
+</head>
+<body>
+  <div id="header"></div>
+  <main class="container">
+    <section class="profile-page">
+      <div class="profile-hero">
+        <div>
+          <span class="tagline">Hồ sơ khách hàng</span>
+          <h1>Quản lý đơn hàng và thông tin cá nhân</h1>
+          <p>Xem nhanh số đơn đã đặt, giá trị đơn hàng và lịch sử mua sắm của bạn.</p>
+        </div>
+        <button id="logout-btn" class="btn btn-ghost">Đăng xuất</button>
+      </div>
+
+      <div class="profile-layout">
+        <section class="profile-main">
+          <div class="summary-grid">
+            <article class="summary-card">
+              <span>Số đơn hàng</span>
+              <strong id="order-count">0</strong>
+            </article>
+            <article class="summary-card">
+              <span>Tổng sản phẩm</span>
+              <strong id="order-items-count">0</strong>
+            </article>
+            <article class="summary-card">
+              <span>Tổng giá trị</span>
+              <strong id="order-total">0</strong>
+            </article>
+          </div>
+
+          <div class="profile-section" id="info">
+            <div class="section-head">
+              <div>
+                <h2>Thông tin cá nhân</h2>
+                <p>Chỉnh sửa thông tin để nhận đơn hàng và thông báo nhanh nhất.</p>
+              </div>
+            </div>
+            <form id="form-ho-so">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="ho_ten">Họ tên</label>
+                  <input type="text" name="ho_ten" placeholder="Nguyễn Văn A" required>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" name="email" placeholder="email@domain.com" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="sdt">Số điện thoại</label>
+                  <input type="tel" name="sdt" placeholder="0912 345 678">
+                </div>
+                <div class="form-group"></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group" style="grid-column: span 2;">
+                  <label for="dia_chi">Địa chỉ giao hàng</label>
+                  <textarea name="dia_chi" placeholder="Số nhà, tên đường, phường, quận, thành phố" style="min-height: 80px; resize: vertical;"></textarea>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
+            </form>
+          </div>
+
+          <div class="profile-section" id="orders">
+            <div class="section-head">
+              <div>
+                <h2>Lịch sử đơn hàng</h2>
+                <p>Xem các đơn hàng và chi tiết, hoặc xoá nếu muốn.</p>
+              </div>
+              <div class="order-search">
+                <input id="order-search" type="search" placeholder="Tìm kiếm đơn hàng...">
+              </div>
+            </div>
+            <div id="don-hang" class="order-list"></div>
+          </div>
+
+          <div class="profile-section" id="contact-history">
+            <div class="section-head">
+              <div>
+                <h2>Lịch sử liên hệ</h2>
+                <p>Xem trạng thái các tin nhắn liên hệ của bạn.</p>
+              </div>
+            </div>
+            <div id="lich-su-lien-he" class="contact-history-list"></div>
+          </div>
+        </section>
+
+        <aside class="profile-sidebar">
+          <div class="profile-card">
+            <p class="profile-label">Xin chào</p>
+            <h2 id="sidebar-name">Khách hàng</h2>
+            <p id="sidebar-email">user@example.com</p>
+            <p style="margin-top:0.75rem;"><a href="../doi_mat_khau/doi_mat_khau.html" class="btn btn-ghost btn-sm">Đổi mật khẩu</a></p>
+          </div>
+          <div class="profile-card">
+            <p class="profile-label">Mẹo nhanh</p>
+            <ul class="profile-tips">
+              <li>Giữ email và số điện thoại chính xác.</li>
+              <li>Nhấp xem chi tiết để kiểm tra sản phẩm trong đơn.</li>
+              <li>Dùng thanh tìm kiếm để lọc nhanh đơn hàng.</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <div id="footer"></div>
+  <script src="../../js/tai_component.js"></script>
+  <script src="../../js/chung.js"></script>
+  <script src="../../js/gio_hang.js"></script>
+  <script src="../../js/yeu_thich.js"></script>
+  <script src="../../js/thanh_phan/header.js"></script>
+  <script src="../../js/trang/lich_su_lien_he.js"></script>
+  <script src="../../js/trang/ho_so.js"></script>
+</body>
+</html>

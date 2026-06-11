@@ -1,0 +1,40 @@
+/* footer.css */
+.site-footer {
+  background: var(--mau-chinh);
+  color: var(--mau-nen);
+  padding: 3rem 0 1.5rem;
+}
+
+.footer-logo {
+  font-family: var(--font-chinh);
+  letter-spacing: 0.3em;
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-grid h4 {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.footer-grid ul { list-style: none; }
+.footer-grid li { margin-bottom: 0.5rem; }
+.footer-grid a { font-size: 0.85rem; opacity: 0.85; }
+.footer-grid a:hover { opacity: 1; }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+}

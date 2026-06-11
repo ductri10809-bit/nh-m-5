@@ -1,0 +1,73 @@
+/* san_pham.css */
+.products-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 3rem;
+  padding: 2rem 0 4rem;
+}
+
+.bo-loc {
+  position: sticky;
+  top: calc(var(--header-h) + 1.5rem);
+  align-self: start;
+  max-height: calc(100vh - var(--header-h) - 3rem);
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.bo-loc::-webkit-scrollbar {
+  width: 6px;
+}
+
+.bo-loc::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.bo-loc::-webkit-scrollbar-thumb {
+  background: var(--mau-chu-nhat);
+  border-radius: 3px;
+}
+
+.bo-loc::-webkit-scrollbar-thumb:hover {
+  background: var(--mau-chu-dam);
+}
+
+.bo-loc__title {
+  font-family: var(--font-chinh);
+  font-size: 1.25rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+
+.products-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--mau-vien);
+}
+
+.products-toolbar h1 {
+  font-family: var(--font-chinh);
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.products-count {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--mau-chu-nhat);
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .products-layout {
+    grid-template-columns: 1fr;
+  }
+  .bo-loc { position: static; }
+}

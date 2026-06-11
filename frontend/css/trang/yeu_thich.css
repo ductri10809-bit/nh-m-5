@@ -1,0 +1,8 @@
+/* yeu_thich.css */
+.wishlist-empty {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: var(--mau-chu-nhat);
+}
+
+.wishlist-empty p { margin-bottom: 1.5rem; }

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dang ky - Luxurious Fashion</title>
+  <link rel="stylesheet" href="../../css/bien.css">
+  <link rel="stylesheet" href="../../css/chung.css">
+  <link rel="stylesheet" href="../../css/tien_ich.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/header.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/footer.css">
+  <link rel="stylesheet" href="../../css/trang/dang_ky.css">
+  <style>
+    .admin-badge {
+      display: inline-block;
+      background-color: #d4af37;
+      color: #000;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-left: 8px;
+    }
+    .admin-notice {
+      background-color: #fff3cd;
+      border-left: 4px solid #d4af37;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #333;
+    }
+    .admin-notice strong {
+      color: #d4af37;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+  <main>
+    <section class="auth-page">
+      <div class="auth-card">
+        <div class="auth-heading">
+          <span class="tagline">Tạo tài khoản mới</span>
+          <h1>Đăng k</h1>
+          <p>Chọn loại tài khoản để đăng ký.</p>
+        </div>
+
+        <div class="auth-tabs">
+          <button class="tab-btn active" data-tab="customer">Khách hàng</button>
+          <button class="tab-btn" data-tab="admin">Quản trị viên <span class="admin-badge">ADMIN</span></button>
+        </div>
+
+        <!-- Customer Registration -->
+        <form id="form-dang-ky" class="auth-form" data-role="customer">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ho_ten">Họ tên</label>
+              <input type="text" id="ho_ten" name="ho_ten" placeholder="Nguyễn Văn A" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="email@domain.com" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="password">Mật khẩu</label>
+              <input type="password" id="password" name="password" placeholder="Tối thiểu 6 ký tự" required>
+            </div>
+            <div class="form-group">
+              <label for="confirm_password">Xác nhận</label>
+              <input type="password" id="confirm_password" name="confirm_password" placeholder="Nhập lại mật khẩu" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full">Đăng ký</button>
+        </form>
+
+        <!-- Admin Registration -->
+        <form id="form-dang-ky-admin" class="auth-form" data-role="admin" style="display: none;">
+          <div class="admin-notice">
+            <strong>⚠ Mã code bắt buộc:</strong> admin2024
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="admin-ho-ten">Họ tên</label>
+              <input type="text" id="admin-ho-ten" name="ho_ten" placeholder="Tên quản trị viên" required>
+            </div>
+            <div class="form-group">
+              <label for="admin-email">Email</label>
+              <input type="email" id="admin-email" name="email" placeholder="admin@domain.com" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="admin-password">Mật khẩu</label>
+              <input type="password" id="admin-password" name="password" placeholder="Tối thiểu 6 ký tự" required>
+            </div>
+            <div class="form-group">
+              <label for="admin-confirm-password">Xác nhận</label>
+              <input type="password" id="admin-confirm-password" name="confirm_password" placeholder="Nhập lại mật khẩu" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="admin-code">Mã code quản trị <span style="color: red;">*</span></label>
+            <input type="password" id="admin-code" name="admin_code" placeholder="Nhập mã code bắt buộc" required>
+            <small style="color: #999; margin-top: 4px; display: block;">Mã code: <strong>admin2024</strong></small>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full">Đăng ký Admin</button>
+        </form>
+
+        <div class="auth-footer">
+          <p>Đã có tài khoản? <a href="../dang_nhap/dang_nhap.html">Đăng nhập</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="footer"></div>
+  <script src="../../js/tai_component.js"></script>
+  <script src="../../js/chung.js"></script>
+  <script src="../../js/gio_hang.js"></script>
+  <script src="../../js/yeu_thich.js"></script>
+  <script src="../../js/thanh_phan/header.js"></script>
+  <script src="../../js/dang_ky.js"></script>
+</body>
+</html>

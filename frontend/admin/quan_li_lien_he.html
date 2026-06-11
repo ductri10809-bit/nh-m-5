@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý Liên hệ - Admin</title>
+  <link rel="stylesheet" href="../../css/bien.css">
+  <link rel="stylesheet" href="../../css/chung.css">
+  <link rel="stylesheet" href="../../css/tien_ich.css">
+  <link rel="stylesheet" href="admin.css">
+  <style>
+    .admin-contact-container {
+      padding: 20px;
+      background: #f5f5f5;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .filters select, .filters input {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .contact-table {
+      width: 100%;
+      background: white;
+      border-collapse: collapse;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .contact-table thead {
+      background: #333;
+      color: white;
+    }
+
+    .contact-table th, .contact-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    .contact-table tbody tr:hover {
+      background: #f9f9f9;
+    }
+
+    .status-badge {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .status-pending { background: #ffc107; color: #333; }
+    .status-received { background: #17a2b8; color: white; }
+    .status-processing { background: #007bff; color: white; }
+    .status-resolved { background: #28a745; color: white; }
+    .status-cancelled { background: #dc3545; color: white; }
+
+    .action-btns {
+      display: flex;
+      gap: 5px;
+    }
+
+    .action-btns select {
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #999;
+    }
+
+    .no-data {
+      text-align: center;
+      padding: 40px;
+      color: #999;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+  <main class="container admin-contact-container">
+    <h1>📧 Quản lý Liên hệ</h1>
+    
+    <div class="filters">
+      <select id="filterStatus">
+        <option value="">-- Tất cả trạng thái --</option>
+        <option value="pending">Chưa xem</option>
+        <option value="received">Đã nhận</option>
+        <option value="processing">Đang xử lí</option>
+        <option value="resolved">Đã giải quyết</option>
+        <option value="cancelled">Huỷ</option>
+      </select>
+      <button onclick="loadContacts()" class="btn btn-primary">Tải lại</button>
+    </div>
+
+    <div id="contactsList" class="loading">Đang tải...</div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="../../js/tai_component.js"></script>
+  <script src="../../js/chung.js"></script>
+  <script>
+    async function loadContacts() {
+      const status = document.getElementById('filterStatus').value;
+      const url = `../api/lien_he_danh_sach.php?status=${status}`;
+      
+      try {
+        const response = await fetch(url);
+        const result = await response.json();
+        
+        if (!result.success) {
+          document.getElementById('contactsList').innerHTML = 
+            '<div class="no-data">Bạn không có quyền truy cập</div>';
+          return;
+        }
+
+        const contacts = result.data || [];
+        if (contacts.length === 0) {
+          document.getElementById('contactsList').innerHTML = 
+            '<div class="no-data">Không có liên hệ</div>';
+          return;
+        }
+
+        let html = '<table class="contact-table"><thead><tr>';
+        html += '<th>ID</th><th>Tên</th><th>Email</th><th>Nội dung</th>';
+        html += '<th>Trạng thái</th><th>Ngày gửi</th><th>Hành động</th></tr></thead><tbody>';
+
+        contacts.forEach(contact => {
+          const preview = contact.message.substring(0, 50) + 
+                         (contact.message.length > 50 ? '...' : '');
+          const date = new Date(contact.created_at).toLocaleDateString('vi-VN');
+          
+          html += `<tr>
+            <td>#${contact.message_id}</td>
+            <td>${contact.fullname}</td>
+            <td>${contact.email}</td>
+            <td title="${contact.message}">${preview}</td>
+            <td>
+              <span class="status-badge status-${contact.status}">
+                ${getStatusLabel(contact.status)}
+              </span>
+            </td>
+            <td>${date}</td>
+            <td>
+              <div class="action-btns">
+                <select onchange="updateStatus(${contact.message_id}, this.value)" style="width: 120px;">
+                  <option value="">-- Cập nhật --</option>
+                  <option value="received">Đã nhận</option>
+                  <option value="processing">Xử lí</option>
+                  <option value="resolved">Xong</option>
+                  <option value="cancelled">Huỷ</option>
+                </select>
+              </div>
+            </td>
+          </tr>`;
+        });
+
+        html += '</tbody></table>';
+        document.getElementById('contactsList').innerHTML = html;
+      } catch (error) {
+        document.getElementById('contactsList').innerHTML = 
+          '<div class="no-data">Lỗi tải dữ liệu: ' + error.message + '</div>';
+      }
+    }
+
+    function getStatusLabel(status) {
+      const labels = {
+        'pending': 'Chưa xem',
+        'received': 'Đã nhận',
+        'processing': 'Đang xử lí',
+        'resolved': 'Đã giải quyết',
+        'cancelled': 'Huỷ'
+      };
+      return labels[status] || status;
+    }
+
+    async function updateStatus(messageId, status) {
+      if (!status) return;
+
+      try {
+        const response = await fetch('../api/lien_he_cap_nhat.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message_id: messageId, status })
+        });
+        const result = await response.json();
+        
+        if (result.success) {
+          alert('Cập nhật thành công');
+          loadContacts();
+        } else {
+          alert('Cập nhật thất bại: ' + result.message);
+        }
+      } catch (error) {
+        alert('Lỗi: ' + error.message);
+      }
+    }
+
+    // Load trang
+    document.addEventListener('DOMContentLoaded', () => {
+      taiComponent('#header', '../../thanh_phan/header/header.html');
+      taiComponent('#footer', '../../thanh_phan/footer/footer.html');
+      loadContacts();
+    });
+  </script>
+</body>
+</html>

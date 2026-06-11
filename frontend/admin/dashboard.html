@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Luxurious Store</title>
+  <link rel="stylesheet" href="../css/bien.css">
+  <link rel="stylesheet" href="../css/chung.css">
+  <link rel="stylesheet" href="../css/tien_ich.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/thanh_phan/header.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div id="header"></div>
+  <main class="admin-dashboard">
+    <section class="admin-hero">
+      <div>
+        <p class="eyebrow">Bảng điều khiển quản trị</p>
+        <h1>Quản trị viên</h1>
+        <p>Quản lý sản phẩm, danh mục, người dùng, đơn hàng và bài viết. Chỉ admin mới truy cập được.</p>
+      </div>
+      <div class="admin-actions">
+        <a href="dashboard.html" class="btn btn-secondary">Làm mới</a>
+        <a href="../trang/trang_chu/trang_chu.html" class="btn">Về trang chủ</a>
+        <button id="btn-logout" class="btn btn-danger">Đăng xuất</button>
+      </div>
+    </section>
+
+    <section class="admin-summary" id="admin-summary">
+      <article class="card">
+        <h3>Sản phẩm</h3>
+        <p id="summary-products">...</p>
+      </article>
+      <article class="card">
+        <h3>Danh mục</h3>
+        <p id="summary-categories">...</p>
+      </article>
+      <article class="card">
+        <h3>Người dùng</h3>
+        <p id="summary-users">...</p>
+      </article>
+      <article class="card">
+        <h3>Đơn hàng</h3>
+        <p id="summary-orders">...</p>
+      </article>
+      <article class="card">
+        <h3>Bài viết</h3>
+        <p id="summary-posts">...</p>
+      </article>
+    </section>
+
+    <section class="admin-section" id="section-products">
+      <h2>Quản lý sản phẩm</h2>
+      <form id="form-add-product" class="admin-form">
+        <input type="text" name="product_name" placeholder="Tên sản phẩm" required>
+        <input type="number" name="price" placeholder="Giá gốc" required>
+        <input type="number" name="sale_price" placeholder="Giá sau giảm (nếu có)">
+        <input type="number" name="stock_quantity" placeholder="Số lượng" required>
+        <input type="text" name="image" placeholder="URL ảnh">
+        <input type="text" name="category_id" placeholder="ID danh mục">
+        <input type="text" name="description" placeholder="Mô tả">
+        <label><input type="checkbox" name="is_bestseller"> Bestseller</label>
+        <label><input type="checkbox" name="is_trend"> Xu hướng</label>
+        <label><input type="checkbox" name="is_sale"> Sale</label>
+        <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+      </form>
+      <div class="admin-table-wrap"><table id="products-table"><thead><tr><th>ID</th><th>Tên</th><th>Giá gốc</th><th>Giá Sale (Nhập + Cập nhập)</th><th>Kho</th><th>Xu hướng</th><th>Hành động</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section class="admin-section" id="section-categories">
+      <h2>Quản lý danh mục</h2>
+      <form id="form-add-category" class="admin-form">
+        <input type="text" name="category_name" placeholder="Tên danh mục" required>
+        <button type="submit" class="btn btn-primary">Thêm danh mục</button>
+      </form>
+      <div class="admin-table-wrap"><table id="categories-table"><thead><tr><th>ID</th><th>Tên</th><th>Hành động</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section class="admin-section" id="section-users">
+      <h2>Quản lý người dùng</h2>
+      <div class="admin-table-wrap"><table id="users-table"><thead><tr><th>ID</th><th>Họ tên</th><th>Email</th><th>Role</th><th>Hành động</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section class="admin-section" id="section-orders">
+      <h2>Quản lý đơn hàng</h2>
+      <div class="admin-table-wrap"><table id="orders-table"><thead><tr><th>ID</th><th>Khách</th><th>Tổng tiền</th><th>Trạng thái</th><th>Hành động</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section class="admin-section" id="section-posts">
+      <h2>Quản lý bài viết</h2>
+      <form id="form-add-post" class="admin-form">
+        <input type="text" name="tieu_de" placeholder="Tiêu đề" required>
+        <input type="text" name="tom_tat" placeholder="Tóm tắt" required>
+        <input type="text" name="hinh_anh" placeholder="URL ảnh" required>
+        <input type="date" name="ngay_dang" placeholder="Ngày đăng" required>
+        <textarea name="noi_dung" placeholder="Nội dung" rows="3" required></textarea>
+        <button type="submit" class="btn btn-primary">Thêm bài viết</button>
+      </form>
+      <div class="admin-table-wrap"><table id="posts-table"><thead><tr><th>ID</th><th>Tiêu đề</th><th>Ngày</th><th>Hành động</th></tr></thead><tbody></tbody></table></div>
+    </section>
+  </main>
+
+  <script src="../js/tai_component.js"></script>
+  <script src="../js/chung.js"></script>
+  <script src="../js/thanh_phan/header.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

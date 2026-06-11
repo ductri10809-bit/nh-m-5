@@ -1,0 +1,142 @@
+/* dang_nhap.css */
+.auth-page {
+  min-height: calc(100vh - 11rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+.auth-card {
+  width: min(100%, 420px);
+  background: var(--mau-nen);
+  border: 1px solid var(--mau-vien);
+  border-radius: 28px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+  padding: 2.25rem;
+  margin-inline: auto;
+  max-width: 94%;
+}
+
+.auth-heading {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.auth-heading .tagline {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  color: var(--mau-phu);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.auth-heading h1 {
+  font-family: var(--font-chinh);
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--mau-chinh);
+}
+
+.auth-heading p {
+  color: var(--mau-chu-nhat);
+  line-height: 1.8;
+}
+
+.auth-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.auth-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mau-chu-nhat);
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--mau-vien);
+  border-radius: 16px;
+  background: var(--mau-nen);
+  transition: border-color 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: var(--mau-chinh);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.auth-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: var(--mau-chu-nhat);
+}
+
+.auth-footer a {
+  color: var(--mau-chinh);
+  font-weight: 600;
+}
+
+@media (max-width: 540px) {
+  .auth-card {
+    padding: 1.25rem 1rem;
+    border-radius: 18px;
+  }
+
+  .auth-heading h1 {
+    font-size: 1.5rem;
+  }
+
+  .auth-page { padding: 2rem 0.75rem; }
+  .auth-form input { padding: 0.85rem 0.9rem; }
+}
+
+@media (max-width: 380px) {
+  .auth-heading h1 { font-size: 1.25rem; }
+  .auth-card { padding: 1rem; }
+  .auth-form label { font-size: 0.65rem; }
+  .btn { padding: 0.65rem 1rem; }
+}
+
+/* Tab styles */
+.auth-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  background: var(--mau-nen-phu);
+  padding: 0.25rem;
+  border-radius: 12px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--mau-chu-nhat);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+  background: white;
+  color: var(--mau-chinh);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tab-btn:hover {
+  color: var(--mau-chinh);
+}

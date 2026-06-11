@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lien he - Luxurious Fashion</title>
+  <link rel="stylesheet" href="../../css/bien.css">
+  <link rel="stylesheet" href="../../css/chung.css">
+  <link rel="stylesheet" href="../../css/tien_ich.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/header.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/footer.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/breadcrumb.css">
+  <link rel="stylesheet" href="../../css/trang/lien_he.css">
+</head>
+<body>
+  <div id="header"></div>
+  <main class="container">
+    <div id="breadcrumb"></div>
+    <h1 class="section-title">Liên hệ</h1>
+    <div class="contact-layout">
+      <div class="contact-info">
+        <h2>Thông tin liên hệ</h2>
+        <p>Email: contact@luxurious-fashion.com</p>
+        <p>Hotline: 1900 1234</p>
+        <p>Dia chi: 123 Duong ABC, Quan 1, TP.HCM</p>
+      </div>
+      <div id="form-lien-he-container"></div>
+    </div>
+  </main>
+  <div id="footer"></div>
+  <script src="../../js/tai_component.js"></script>
+  <script src="../../js/chung.js"></script>
+  <script src="../../js/gio_hang.js"></script>
+  <script src="../../js/yeu_thich.js"></script>
+  <script src="../../js/thanh_phan/header.js"></script>
+  <script src="../../js/trang/lien_he.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      taiComponent('#breadcrumb', '../../thanh_phan/breadcrumb/breadcrumb.html');
+      taiComponent('#form-lien-he-container', '../../thanh_phan/form_lien_he/form_lien_he.html');
+    });
+  </script>
+</body>
+</html>

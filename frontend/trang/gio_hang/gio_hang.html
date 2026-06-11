@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giỏ hàng — LUXURIOUS STORE</title>
+  <link rel="stylesheet" href="../../css/bien.css">
+  <link rel="stylesheet" href="../../css/chung.css">
+  <link rel="stylesheet" href="../../css/tien_ich.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/header.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/footer.css">
+  <link rel="stylesheet" href="../../css/trang/gio_hang.css">
+  <style>
+    /* Style nhẹ cho nút đóng popup (nếu chưa có trong file CSS chính) */
+    .close-success-btn {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      font-size: 28px;
+      font-weight: bold;
+      line-height: 1;
+      cursor: pointer;
+      color: #333;
+      transition: color 0.2s;
+      padding: 0 8px;
+    }
+    .close-success-btn:hover {
+      color: #b3002f;
+    }
+    .order-success__box {
+      position: relative;
+      background: white;
+      padding: 2rem 2rem 2rem 2rem;
+      border-radius: 12px;
+      max-width: 480px;
+      margin: 2rem auto;
+      text-align: center;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+    }
+    .order-success {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+    .order-success[hidden] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+  <main class="container cart-page">
+    <h1 class="section-title" style="margin-top:2rem">Giỏ hàng</h1>
+    <div class="cart-layout">
+      <section class="cart-items">
+        <div id="cart-empty" class="cart-empty" hidden>
+          <p>Giỏ hàng của bạn đang trống.</p>
+          <a href="../san_pham/san_pham.html" class="btn">Tiếp tục mua sắm</a>
+        </div>
+        <div id="cart-list" class="cart-list"></div>
+      </section>
+      <aside class="cart-sidebar">
+        <div class="cart-summary">
+          <p class="cart-summary__row"><span>Tạm tính</span><span id="cart-subtotal">0 ₫</span></p>
+          <p class="cart-summary__row cart-summary__total"><span>Tổng cộng</span><span id="cart-total">0 ₫</span></p>
+        </div>
+        <form id="form-dat-hang" class="checkout-form">
+          <h2>Thông tin giao hàng</h2>
+          <p class="checkout-note">Điền đầy đủ để đặt hàng (không bắt buộc đăng nhập).</p>
+          <div class="form-group">
+            <label for="ho-ten">Họ và tên *</label>
+            <input type="text" id="ho-ten" name="ho_ten" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="sdt">Số điện thoại *</label>
+            <input type="tel" id="sdt" name="sdt" required autocomplete="tel">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="dia-chi">Địa chỉ giao hàng *</label>
+            <textarea id="dia-chi" name="dia_chi" rows="3" required placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="ghi-chu">Ghi chú đơn hàng</label>
+            <textarea id="ghi-chu" name="ghi_chu" rows="2" placeholder="Tùy chọn"></textarea>
+          </div>
+
+          <div class="form-group payment-methods">
+            <label>Phương thức thanh toán</label>
+            <div class="payment-options">
+              <!-- COD - Default -->
+              <label class="payment-option">
+                <input type="radio" name="payment_method" value="cod" checked>
+                <span class="payment-label">Thanh toán khi nhận hàng (COD)</span>
+              </label>
+
+              <!-- Bank Transfer -->
+              <label class="payment-option payment-group">
+                <input type="radio" name="payment_method" value="bank_transfer">
+                <span class="payment-label">Chuyển khoản ngân hàng</span>
+                <div class="bank-options" hidden>
+                  <div class="bank-list">
+                    <label class="bank-item">
+                      <input type="radio" name="bank_name" value="vietcombank" hidden>
+                      <div class="bank-card vcb">
+                        <div class="bank-logo">VCB</div>
+                        <div class="bank-name">Vietcombank</div>
+                      </div>
+                    </label>
+                    <label class="bank-item">
+                      <input type="radio" name="bank_name" value="techcombank" hidden>
+                      <div class="bank-card tcb">
+                        <div class="bank-logo">TCB</div>
+                        <div class="bank-name">Techcombank</div>
+                      </div>
+                    </label>
+                    <label class="bank-item">
+                      <input type="radio" name="bank_name" value="bidv" hidden>
+                      <div class="bank-card bidv">
+                        <div class="bank-logo">BIDV</div>
+                        <div class="bank-name">BIDV</div>
+                      </div>
+                    </label>
+                    <label class="bank-item">
+                      <input type="radio" name="bank_name" value="mbbank" hidden>
+                      <div class="bank-card mbb">
+                        <div class="bank-logo">MBB</div>
+                        <div class="bank-name">MB Bank</div>
+                      </div>
+                    </label>
+                    <label class="bank-item">
+                      <input type="radio" name="bank_name" value="agribank" hidden>
+                      <div class="bank-card agb">
+                        <div class="bank-logo">AGB</div>
+                        <div class="bank-name">Agribank</div>
+                      </div>
+                    </label>
+                    <label class="bank-item">
+                      <input type="radio" name="bank_name" value="vietinbank" hidden>
+                      <div class="bank-card ctg">
+                        <div class="bank-logo">CTG</div>
+                        <div class="bank-name">VietinBank</div>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </label>
+
+              <!-- PayPal -->
+              <label class="payment-option">
+                <input type="radio" name="payment_method" value="paypal">
+                <span class="payment-label">
+                  <svg class="paypal-icon" viewBox="0 0 24 24" width="20" height="20">
+                    <path fill="currentColor" d="M9.35,21 C8.75,21 8.25,20.5 8.25,19.9 L8.25,4.1 C8.25,3.5 8.75,3 9.35,3 L15.85,3 C18.05,3 19.85,4.8 19.85,7 C19.85,8.65 18.95,10.15 17.6,10.95 C18.95,11.75 19.85,13.25 19.85,15 C19.85,17.2 18.05,19 15.85,19 L9.35,19 L9.35,21 Z M13,7 L13,10 L15.85,10 C16.85,10 17.65,9.2 17.65,8.2 C17.65,7.2 16.85,7 15.85,7 L13,7 Z M13,12 L13,17 L15.85,17 C16.85,17 17.65,16.2 17.65,15.2 C17.65,14.2 16.85,12 15.85,12 L13,12 Z"/>
+                  </svg>
+                  PayPal
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%" id="btn-dat-hang">Đặt hàng</button>
+        </form>
+      </aside>
+    </div>
+  </main>
+  <div id="footer"></div>
+
+  <!-- Popup thông báo thành công (đã thêm nút X) -->
+  <div id="order-success" class="order-success" hidden>
+    <div class="order-success__box">
+      <button class="close-success-btn" aria-label="Đóng thông báo" ><a href="gio_hang.html">x</a></button>
+      <h2>Cảm ơn bạn!</h2>
+      <p id="order-success-msg">Đơn hàng đã được ghi nhận.</p>
+      <a href="../san_pham/san_pham.html" class="btn">Tiếp tục mua sắm</a>
+    </div>
+  </div>
+
+  <!-- Các file JS chính -->
+  <script src="../../js/tai_component.js"></script>
+  <script src="../../js/chung.js"></script>
+  <script src="../../js/gio_hang.js"></script>
+  <script src="../../js/yeu_thich.js"></script>
+  <script src="../../js/thanh_phan/header.js"></script>
+  <script src="../../js/trang/gio_hang.js"></script>
+  <script src="../../js/trang/payment.js"></script>
+  <!-- File JS xử lý đóng popup (đã tách riêng) -->
+  <script src="../../js/popup_close.js"></script>
+</body>
+</html>

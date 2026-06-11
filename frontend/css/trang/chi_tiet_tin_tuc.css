@@ -1,0 +1,21 @@
+/* chi_tiet_tin_tuc.css */
+.article-detail {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.article-detail h1 {
+  font-family: var(--font-chinh);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.article-detail__meta {
+  color: var(--mau-chu-nhat);
+  margin-bottom: 2rem;
+}
+
+.article-detail__content {
+  line-height: 1.8;
+}

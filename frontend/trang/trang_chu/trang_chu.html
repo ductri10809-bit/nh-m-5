@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUXURIOUS STORE — Thời trang cao cấp</title>
+  <link rel="stylesheet" href="../../css/bien.css">
+  <link rel="stylesheet" href="../../css/chung.css">
+  <link rel="stylesheet" href="../../css/tien_ich.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/header.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/footer.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/banner.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/the_san_pham.css">
+  <link rel="stylesheet" href="../../css/trang/trang_chu.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+</head>
+<body class="page-home">
+  <div id="header"></div>
+  <div id="banner"></div>
+  <main>
+    <section class="container py-3">
+      <p class="section-subtitle">Curated Selection</p>
+      <h2 class="section-title">Sản phẩm nổi bật</h2>
+      <div id="san-pham-noi-bat" class="products-grid"></div>
+      <p style="text-align:center;margin-top:2.5rem">
+        <a href="../san_pham/san_pham.html" class="btn">Xem tất cả</a>
+      </p>
+    </section>
+  </main>
+  <div id="footer"></div>
+  <script src="../../js/tai_component.js"></script>
+  <script src="../../js/chung.js"></script>
+  <script src="../../js/gio_hang.js"></script>
+  <script src="../../js/yeu_thich.js"></script>
+  <script src="../../js/thanh_phan/header.js"></script>
+  <script src="../../js/thanh_phan/the_san_pham.js"></script>
+  <script src="../../js/thanh_phan/banner.js"></script>
+  <script src="../../js/trang/trang_chu.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      taiComponent('#banner', '../../thanh_phan/banner/banner.html');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi tiet tin tuc - Luxurious Fashion</title>
+  <link rel="stylesheet" href="../../css/bien.css">
+  <link rel="stylesheet" href="../../css/chung.css">
+  <link rel="stylesheet" href="../../css/tien_ich.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/header.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/footer.css">
+  <link rel="stylesheet" href="../../css/thanh_phan/breadcrumb.css">
+  <link rel="stylesheet" href="../../css/trang/chi_tiet_tin_tuc.css">
+</head>
+<body>
+  <div id="header"></div>
+  <main class="container">
+    <div id="breadcrumb"></div>
+    <article class="article-detail">
+      <h1 id="tieu-de"></h1>
+      <p class="article-detail__meta" id="ngay-dang"></p>
+      <img id="hinh-anh" src="" alt="">
+      <div id="noi-dung" class="article-detail__content"></div>
+    </article>
+  </main>
+  <div id="footer"></div>
+  <script src="../../js/tai_component.js"></script>
+  <script src="../../js/chung.js"></script>
+  <script src="../../js/gio_hang.js"></script>
+  <script src="../../js/yeu_thich.js"></script>
+  <script src="../../js/thanh_phan/header.js"></script>
+  <script src="../../js/trang/chi_tiet_tin_tuc.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      taiComponent('#breadcrumb', '../../thanh_phan/breadcrumb/breadcrumb.html');
+    });
+  </script>
+</body>
+</html>

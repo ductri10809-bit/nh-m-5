@@ -1,0 +1,172 @@
+/* the_san_pham.css */
+.product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card__media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--mau-nen-phu);
+}
+
+.product-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.product-card:hover .product-card__image {
+  transform: scale(1.03);
+}
+
+.product-card__actions {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  display: flex;
+  gap: 0.5rem;
+  opacity: 0;
+  transition: opacity var(--transition), transform var(--transition);
+  z-index: 2;
+}
+
+.product-card:hover .product-card__actions {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.product-card__btn {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--mau-chinh);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), color var(--transition);
+}
+
+.product-card__btn:hover {
+  background: var(--mau-chinh);
+  color: #fff;
+}
+
+.product-card__btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.4;
+}
+
+.product-card__btn.is-active svg {
+  fill: currentColor;
+}
+
+.product-card__body {
+  padding: 1rem 0 0;
+  text-align: center;
+}
+
+.product-card__category {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mau-chu-nhat);
+  margin-bottom: 0.35rem;
+}
+
+.product-card__name {
+  font-family: var(--font-chinh);
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.35rem;
+}
+
+.product-card__name a:hover { opacity: 0.6; }
+
+.product-card__price {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--mau-chu-nhat);
+}
+
+.product-card__swatches {
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-top: 0.65rem;
+}
+
+.swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--mau-vien);
+  cursor: default;
+}
+
+/* Badges for trend and sale */
+.product-card__badges {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 3;
+}
+
+.trend-badge,
+.sale-badge {
+  padding: 0.5rem 0.8rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  display: inline-block;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.trend-badge {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.sale-badge {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+.product-card__price-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.product-card__price-original {
+  font-size: 0.9rem;
+  color: #999;
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.product-card__price {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--mau-trang-chu);
+}
+
+

@@ -1,0 +1,22 @@
+/* bien.css - Luxury / Céline-inspired design tokens */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap');
+
+:root {
+  --mau-chinh: #0a0a0a;
+  --mau-phu: #8b7355;
+  --mau-accent: #c4a574;
+  --mau-nen: #faf9f7;
+  --mau-nen-phu: #f3f1ed;
+  --mau-chu: #1a1a1a;
+  --mau-chu-nhat: #6b6b6b;
+  --mau-vien: #e5e2dc;
+  --font-chinh: 'Cormorant Garamond', Georgia, serif;
+  --font-phu: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+  --chieu-rong-max: 1440px;
+  --header-h: 72px;
+  --khoang-cach: 1.25rem;
+  --bo-tron: 0;
+  --bong: none;
+  --transition: 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --gradient-logo: linear-gradient(135deg, #1a1a1a 0%, #8b7355 45%, #c4a574 70%, #1a1a1a 100%);
+}
